@@ -11,7 +11,7 @@ This will print out a random string. To add a link just do a POST request to the
 
 ```
 # using curl
-curl --post -H "X-Token: $TOKEN" --form "url=http://example.com" http://redirect.example.com/l/homepage
+curl --post -H "X-Token: $TOKEN" --form "url=http://example.com/some/long/path?with=query&params=as&well=!" http://redirect.example.com/l/homepage
 ```
 
 ```python
@@ -21,7 +21,7 @@ TOKEN = ""
 resp = requests.post(
     "http://redirect.example.com/l/homepage",
     params={
-        'url': 'http://example.com'
+        'url': 'http://example.com/some/long/path?with=query&params=as&well=!'
     },
     headers={
         'X-Token': TOKEN
@@ -29,6 +29,10 @@ resp = requests.post(
 )
 assert resp.status_code == 200
 ```
+
+Now you can give `http://redirect.example.com/l/homepage` to everyone instead of the long and hard to remember `http://example.com/some/long/path?with=query&params=as&well=!`.
+
+Added benefit: You can have multiple links point to the same URL to track visits you got via different means (a Facebook post and a newsletter for example) separately. You will see a pageview and an outgoing link in piwik.
 
 # Installation
 
