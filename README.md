@@ -11,24 +11,10 @@ This will print out a random string. To add a link just do a POST request to the
 
 ```
 # using curl
-curl --post -H "X-Token: $TOKEN" --form "url=http://example.com/some/long/path?with=query&params=as&well=!" http://redirect.example.com/l/homepage
+curl --post -H "X-Token: $TOKEN" --form "dest=http://example.com/some/long/path?with=query&params=as&well=!" http://redirect.example.com/l/homepage
 ```
 
-```python
-# using the requests python module
-import requests
-TOKEN = ""
-resp = requests.post(
-    "http://redirect.example.com/l/homepage",
-    params={
-        'url': 'http://example.com/some/long/path?with=query&params=as&well=!'
-    },
-    headers={
-        'X-Token': TOKEN
-    }
-)
-assert resp.status_code == 200
-```
+Also look in `add-link.py` for a version using the `requests` python module.
 
 Now you can give `http://redirect.example.com/l/homepage` to everyone instead of the long and hard to remember `http://example.com/some/long/path?with=query&params=as&well=!`.
 
