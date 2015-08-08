@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import Response, request
+from flask import Response, abort, request
 
 from .app import db
 from .model import Token
