@@ -21,7 +21,8 @@ def link(id):
             remote_addr=request.remote_addr,
             referer=request.headers.get('Referer', default=None),
             language=request.headers.get('Accept-Language', default=None),
-            user_agent=request.headers.get('User-Agent', default=None)
+            user_agent=request.headers.get('User-Agent', default=None),
+            costum_variables=link.costum_tracking_variables,
         )
         return redirect(link.dest)
     except sa.orm.exc.NoResultFound:
