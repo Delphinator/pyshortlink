@@ -25,9 +25,12 @@ class PiwikTracker(DummyTracker):
         self.queue = queue
 
     def track_visit(self, url, redirected_to, remote_addr, referer=None,
-                    time=None, language=None, user_agent=None):
+                    time=None, language=None, user_agent=None,
+                    costum_variables=None):
         if time is None:
             time = datetime.datetime.utcnow()
+        if costum_variables is None:
+            costum_variables = {}
 
         base_args = {
             'apiv': '1',
@@ -43,11 +46,16 @@ class PiwikTracker(DummyTracker):
 
         landing_visit = {
             "url": url,
+            "_cvar": {},  # visit scope costum variables
             "new_visit": "1",  # force a new visit
         }
         if referer is not None:
             landing_view["referer"] = referer
-
+        # piwik expects strings as keys starting with "1"
+        for idx, n in enumerate(sorted(costum_variables)):
+            landing_visit["_cvar"][str(idx)] = [
+                n, costum_variables[n]
+            ]
         redirect_visit = {
             "url": redirected_to,
             "link": redirected_to,  # makes this an outgoing link
