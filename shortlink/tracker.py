@@ -50,7 +50,7 @@ class PiwikTracker(DummyTracker):
             "new_visit": "1",  # force a new visit
         }
         if referer is not None:
-            landing_view["referer"] = referer
+            landing_visit["referer"] = referer
         # piwik expects strings as keys starting with "1"
         for idx, n in enumerate(sorted(costum_variables)):
             landing_visit["_cvar"][str(idx)] = [
